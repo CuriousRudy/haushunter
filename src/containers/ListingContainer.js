@@ -11,7 +11,9 @@ export default class ListingContainer extends React.Component {
   };
   //we get the listings
   render() {
-    console.log(this.state.listings);
-    return <div>{'hey'}</div>;
+    const listings = this.state.listings.map(listing => {
+      return <Listing key={listing.id} listing={listing} />;
+    });
+    return <div className="col s4">{listings}</div>;
   }
 }
