@@ -1,7 +1,7 @@
 TODO:
 
-1. confirm state sticks in listings/appointments, and works in the right part of lifecycle
+1. fix time datatype in db.
 
-2. iterate over resource to display in the presentational component, use drop down.
+2. Add new appointment button to listings, along with create action and form for new appointments.
 
-3. make sure props and state are clean
+3. Add a NewListingForm, with ternary logic at UserContainer level to render either the appointment/listing containers, or the new form

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
+import NoteContainer from '../containers/NoteContainer';
 
 const Appointment = props => {
   return (
-    <div>
+    <div className="col s12 m6">
       <Collapsible defaultActiveKey={0}>
         <CollapsibleItem header="Date" icon="date_range">
           {props.appointment.date}
@@ -11,8 +12,8 @@ const Appointment = props => {
         <CollapsibleItem header="Time" icon="access_time">
           {props.appointment.time}
         </CollapsibleItem>
-        <CollapsibleItem header="Listing" icon="info">
-          "This needs something"
+        <CollapsibleItem header="Notes" icon="info">
+          <NoteContainer notes={props.appointment.notes} />
         </CollapsibleItem>
       </Collapsible>
     </div>

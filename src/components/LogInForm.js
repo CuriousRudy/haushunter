@@ -13,7 +13,7 @@ export default class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Row>
           <Input
             onChange={this.handleChange}
@@ -25,10 +25,12 @@ export default class LoginForm extends React.Component {
             <Icon>email</Icon>
           </Input>
         </Row>
-        <div>
-          <Button onClick={this.props.logIn(this.state.email)} waves="light">
-            button
-          </Button>
+        <div className="container">
+          <div>
+            <Button onClick={this.props.logIn(this.state.email)} waves="light">
+              button
+            </Button>
+          </div>
         </div>
       </div>
     );

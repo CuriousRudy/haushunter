@@ -38,7 +38,10 @@ export default class UserContainer extends React.Component {
         <ListingContainer listings={this.state.thisUser.listings} />
       );
 
-    // console.log('user state', this.state);
+    //need to add another const switch to check if state = form
+    //if state === form, show nothing but the new form.
+    //on submit, clear containerState and render our loading until we
+    //change containerState again.
     return (
       <div className="row">
         {this.state.containerState === '' ? (
