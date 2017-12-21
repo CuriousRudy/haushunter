@@ -28,7 +28,7 @@ export default class UserContainer extends React.Component {
   render() {
     // console.log('user state', this.state);
     return (
-      <div>
+      <div className="row">
         {this.state.containerState === 'appointments' ? (
           <AppointmentContainer
             appointments={this.state.thisUser.appointments}
