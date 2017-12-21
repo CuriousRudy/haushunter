@@ -1,5 +1,5 @@
-import React from 'react';
-import Appointment from '../components/Appointment';
+import React from "react";
+import Appointment from "../components/Appointment";
 
 export default class AppointmentContainer extends React.Component {
   state = {
@@ -12,10 +12,9 @@ export default class AppointmentContainer extends React.Component {
   //we get the appointments
   render() {
     console.log(this.state.appointments);
-    return (
-      <div>
-        <Appointment />
-      </div>
-    );
+    const appointmentsToRender = this.state.appointments.map(appointment => {
+      return <Appointment appointment={appointment} />;
+    });
+    return <div>{appointmentsToRender}</div>;
   }
 }
