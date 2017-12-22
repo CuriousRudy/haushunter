@@ -1,6 +1,6 @@
 import React from 'react';
 import Listing from '../components/Listing';
-import { Tab, Tabs } from 'react-materialize';
+import { Button, Icon, Tab, Tabs } from 'react-materialize';
 import NewListing from '../components/NewListing';
 import api from '../services/api';
 
@@ -16,7 +16,9 @@ export default class ListingContainer extends React.Component {
   render() {
     console.log(this.props);
     const listings = this.state.listings.map(listing => {
-      return <Listing key={listing.id} listing={listing} />;
+      return (
+        <Listing key={listing.id} user={this.props.user} listing={listing} />
+      );
     });
     return (
       <div className="container">
