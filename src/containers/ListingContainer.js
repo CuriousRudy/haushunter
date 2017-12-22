@@ -16,7 +16,13 @@ export default class ListingContainer extends React.Component {
   render() {
     console.log(this.props);
     const listings = this.state.listings.map(listing => {
-      return <Listing key={listing.id} listing={listing} />;
+      return (
+        <Listing
+          key={listing.id}
+          userId={this.props.userId}
+          listing={listing}
+        />
+      );
     });
     return (
       <div className="container">

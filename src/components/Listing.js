@@ -5,6 +5,7 @@ import {
   Collapsible,
   CollapsibleItem
 } from 'react-materialize';
+import NewAppointment from './NewAppointment';
 
 const Listing = props => {
   const card = (
@@ -20,6 +21,9 @@ const Listing = props => {
       </CollapsibleItem>
       <CollapsibleItem header="Asking Price" icon="attach_money">
         {`$ ${props.listing.asking_price}.00`}
+      </CollapsibleItem>
+      <CollapsibleItem header="Add Appointment" icon="pencil">
+        <NewAppointment userId={props.userId} listingId={props.listing.id} />
       </CollapsibleItem>
     </Collapsible>
   );
