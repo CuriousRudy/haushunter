@@ -17,7 +17,7 @@ export default class LoginForm extends React.Component {
         <Row>
           <Input
             onChange={this.handleChange}
-            s={4}
+            s={6}
             label="Email"
             value={this.state.email}
             validate
@@ -26,11 +26,13 @@ export default class LoginForm extends React.Component {
           </Input>
         </Row>
         <div className="container">
-          <div>
-            <Button onClick={this.props.logIn(this.state.email)} waves="light">
-              button
-            </Button>
-          </div>
+          <Button
+            s={5}
+            onClick={this.props.logIn(this.state.email)}
+            waves="light"
+          >
+            Log In
+          </Button>
         </div>
       </div>
     );

@@ -41,18 +41,25 @@ class App extends React.Component {
       const user = this.state.allUsers.find(user => {
         return user.email.includes(arg);
       });
-      if (user.id) {
-        this.setState({ userId: user.id });
-        this.setState({ loggedIn: true });
-      }
+      this.setState({ userId: user.id });
+      this.setState({ loggedIn: true });
     };
+  };
+
+  logOut = () => {
+    this.setState({
+      loggedIn: false
+    });
+    this.setState({
+      userId: ''
+    });
   };
 
   //built in logic to load the login form first, and hide it after you sign in
   render() {
     return (
       <div className="App">
-        <Navbar brand="HausHuntr" left>
+        <Navbar brand="HausHuntr" right>
           <NavItem
             onClick={this.viewAppointments}
             name="appointments"
@@ -63,6 +70,11 @@ class App extends React.Component {
           <NavItem onClick={this.viewListings} name="listings" href="/listings">
             Listings
           </NavItem>
+          {this.state.loggedIn === true ? (
+            <NavItem onClick={this.logOut} name="logout">
+              Log Out
+            </NavItem>
+          ) : null}
         </Navbar>
         {this.state.loggedIn === true ? (
           <UserContainer
@@ -70,7 +82,9 @@ class App extends React.Component {
             containerState={this.state.containerToggle}
           />
         ) : (
-          <LoginForm logIn={this.logIn} />
+          <div className="container">
+            <LoginForm logIn={this.logIn} />
+          </div>
         )}
       </div>
     );

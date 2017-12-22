@@ -30,6 +30,7 @@ export default class UserContainer extends React.Component {
 
   //pass our resource directly down to the AppointmentContainer
   render() {
+    console.log(this.state);
     const containerSwitch =
       this.state.containerState === '' ||
       this.state.containerState === 'appointments' ? (

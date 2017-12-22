@@ -1,6 +1,7 @@
 import React from 'react';
 import Listing from '../components/Listing';
-import { Button, Icon } from 'react-materialize';
+import { Tab, Tabs } from 'react-materialize';
+import NewListing from '../components/NewListing';
 
 export default class ListingContainer extends React.Component {
   state = {
@@ -18,16 +19,15 @@ export default class ListingContainer extends React.Component {
     });
     return (
       <div className="container">
-        <div className="col s12">
-          <div className="container">
-            <div className="col s10">
-              <Button waves="light">
-                Add Listing<Icon right>edit</Icon>
-              </Button>
-              {listings}
-            </div>
-          </div>
-        </div>
+        <br />
+        <Tabs className="tab-demo z-depth-0">
+          <Tab title="All Listings" active>
+            {listings}
+          </Tab>
+          <Tab title="Add a Listing">
+            <NewListing />
+          </Tab>
+        </Tabs>
       </div>
     );
   }

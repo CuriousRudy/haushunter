@@ -27,11 +27,11 @@ const Listing = props => {
     <div>
       <Card
         header={<CardTitle reveal image={'../img/house.jpg'} waves="light" />}
-        title="Card Title"
+        title={props.listing.street_address}
         reveal={card}
       >
         <p>
-          <a href="#">This is a link</a>
+          <a href="/">See in Maps</a>
         </p>
       </Card>
     </div>
