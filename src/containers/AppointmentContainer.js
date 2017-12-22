@@ -1,18 +1,21 @@
 import React from 'react';
 import Appointment from '../components/Appointment';
+import api from '../services/api';
 
 export default class AppointmentContainer extends React.Component {
   state = {
-    appointments: [],
-    notes: []
+    appointments: []
   };
   //on mount, set state with the appointments props
   componentDidMount = () => {
-    this.setState({ appointments: this.props.appointments });
+    api.appointments
+      .getAppointments(this.props.userId)
+      .then(appointments => this.setState({ appointments }));
   };
   //we get the appointments
   render() {
-    console.log(this.props.appointments[0].notes);
+    // console.log(this.state.appointments);
+    // console.log(this.props.appointments[0].notes);
     const appointments = this.state.appointments.map(appointment => {
       return (
         <Appointment

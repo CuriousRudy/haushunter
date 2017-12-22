@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Input } from 'react-materialize';
+import { Button, Row, Input } from 'react-materialize';
 
 class NewListing extends React.Component {
   state = {
@@ -20,14 +20,12 @@ class NewListing extends React.Component {
 
   //a simple materialize form to add a listing, hidden in a little tab
   render() {
-    console.log(this.state);
     return (
       <Row>
         <Input
           name="street_address"
           onChange={this.updateState}
           value={this.state.street_address}
-          placeholder="Street Address"
           s={12}
           label="Street Address"
         />
@@ -37,7 +35,6 @@ class NewListing extends React.Component {
           value={this.state.city}
           s={6}
           label="City"
-          placeholder="i.e. Brooklyn"
         />
         <Input
           name="state"
@@ -79,6 +76,11 @@ class NewListing extends React.Component {
           label="Asking Price"
           s={5}
         />
+        <div className="container">
+          <Button waves="light" left>
+            Submit
+          </Button>
+        </div>
       </Row>
     );
   }

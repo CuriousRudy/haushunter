@@ -1,4 +1,5 @@
 import React from 'react';
+import api from './services/api';
 import { Navbar, NavItem } from 'react-materialize';
 import UserContainer from './containers/UserContainer';
 import LoginForm from './components/LogInForm';
@@ -8,13 +9,11 @@ class App extends React.Component {
     allUsers: [],
     containerToggle: '',
     loggedIn: false,
-    userId: ''
+    thisUser: {}
   };
   //loads all users so we can check if we are logging in
   componentDidMount = () => {
-    fetch('http://localhost:3000/api/v1/users')
-      .then(res => res.json())
-      .then(allUsers => this.setState({ allUsers }));
+    api.users.getUsers().then(allUsers => this.setState({ allUsers }));
   };
 
   //sets the filter toggle to listings
@@ -39,10 +38,9 @@ class App extends React.Component {
     return e => {
       e.preventDefault();
       const user = this.state.allUsers.find(user => {
-        return user.email.includes(arg);
+        return user.email === arg;
       });
-      this.setState({ userId: user.id });
-      this.setState({ loggedIn: true });
+      this.setState({ thisUser: user, loggedIn: true });
     };
   };
 
@@ -51,7 +49,7 @@ class App extends React.Component {
       loggedIn: false
     });
     this.setState({
-      userId: ''
+      thisUser: {}
     });
   };
 
@@ -78,7 +76,7 @@ class App extends React.Component {
         </Navbar>
         {this.state.loggedIn === true ? (
           <UserContainer
-            loggedIn={this.state.userId}
+            thisUser={this.state.thisUser}
             containerState={this.state.containerToggle}
           />
         ) : (
