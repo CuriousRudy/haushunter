@@ -1,13 +1,13 @@
-import React from 'react';
-import api from './services/api';
-import { Navbar, NavItem } from 'react-materialize';
-import UserContainer from './containers/UserContainer';
-import LoginForm from './components/LogInForm';
+import React from "react";
+import api from "./services/api";
+import { Navbar, NavItem } from "react-materialize";
+import UserContainer from "./containers/UserContainer";
+import LoginForm from "./components/LogInForm";
 
 class App extends React.Component {
   state = {
     allUsers: [],
-    containerToggle: '',
+    containerToggle: "",
     loggedIn: false,
     thisUser: {}
   };
@@ -19,17 +19,17 @@ class App extends React.Component {
   //sets the filter toggle to listings
   viewListings = e => {
     e.preventDefault();
-    return this.state.containerToggle === 'appointments' ||
-      this.state.containerToggle === ''
-      ? this.setState({ containerToggle: 'listings' })
+    return this.state.containerToggle === "appointments" ||
+      this.state.containerToggle === ""
+      ? this.setState({ containerToggle: "listings" })
       : null;
   };
   //sets the filter toggle to appointments
   viewAppointments = e => {
     e.preventDefault();
-    return this.state.containerToggle === 'listings' ||
-      this.state.containerToggle === ''
-      ? this.setState({ containerToggle: 'appointments' })
+    return this.state.containerToggle === "listings" ||
+      this.state.containerToggle === ""
+      ? this.setState({ containerToggle: "appointments" })
       : null;
   };
 

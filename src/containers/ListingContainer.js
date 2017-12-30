@@ -1,8 +1,8 @@
-import React from 'react';
-import Listing from '../components/Listing';
-import { Tab, Tabs } from 'react-materialize';
-import NewListing from '../components/NewListing';
-import api from '../services/api';
+import React from "react";
+import Listing from "../components/Listing";
+import { Tab, Tabs } from "react-materialize";
+import NewListing from "../components/NewListing";
+import api from "../services/api";
 
 export default class ListingContainer extends React.Component {
   state = {
@@ -11,7 +11,57 @@ export default class ListingContainer extends React.Component {
   //on mount, set state with the listings props
   componentDidMount = () => {
     api.listings.getListings().then(listings => this.setState({ listings }));
+    this.newListingId();
   };
+
+  newListingId = () => {
+    this.state.listings.length + 1;
+  };
+
+  createNewListing = listing => {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify({ listing: listing })
+    };
+
+    fetch("http://localhost:3000/api/v1/listings", options)
+      .then(res => res.json())
+      .then(console.log)
+      .then(listing => {
+        this.setState(prevState => {
+          return {
+            listings: [...prevState.listings, listing]
+          };
+        });
+      });
+  };
+
+  createNewAppointment = appointment => {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify({ appointment: appointment })
+    };
+
+    fetch("http://localhost:3000/api/v1/appointments", options)
+      .then(res => res.json())
+      .then(console.log)
+      .then(appointment => {
+        this.setState(prevState => {
+          return {
+            appointments: [...prevState.appointments, appointment]
+          };
+        });
+      });
+  };
+
   //we get the listings
   render() {
     console.log(this.props);
@@ -21,6 +71,8 @@ export default class ListingContainer extends React.Component {
           key={listing.id}
           userId={this.props.userId}
           listing={listing}
+          createNewAppointment={this.createNewAppointment}
+          newAppointmentId={this.newAppointmentId}
         />
       );
     });
@@ -32,7 +84,10 @@ export default class ListingContainer extends React.Component {
             {listings}
           </Tab>
           <Tab title="Add a Listing">
-            <NewListing />
+            <NewListing
+              createNewListing={this.createNewListing}
+              newListingId={this.newListingId}
+            />
           </Tab>
         </Tabs>
       </div>

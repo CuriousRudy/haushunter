@@ -1,9 +1,9 @@
-import React from 'react';
-import { Row, Input, Icon, Button } from 'react-materialize';
+import React from "react";
+import { Row, Input, Icon, Button } from "react-materialize";
 
 export default class LoginForm extends React.Component {
   state = {
-    email: ''
+    email: ""
   };
   handleChange = e => {
     this.setState({

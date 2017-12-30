@@ -1,21 +1,27 @@
-import React from 'react';
-import { Button, Row, Input } from 'react-materialize';
+import React from "react";
+import { Button, Row, Input } from "react-materialize";
 
 class NewListing extends React.Component {
   state = {
-    street_address: '',
-    city: '',
-    state: '',
-    zip: '',
-    beds: '',
-    baths: '',
-    asking_price: ''
+    id: this.props.newListingId + 1,
+    street_address: "",
+    city: "",
+    state: "",
+    zip: "",
+    beds: "",
+    baths: "",
+    asking_price: ""
   };
 
   updateState = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+
+  handleClick = e => {
+    e.preventDefault();
+    this.props.createNewListing(this.state);
   };
 
   //a simple materialize form to add a listing, hidden in a little tab
@@ -77,7 +83,7 @@ class NewListing extends React.Component {
           s={5}
         />
         <div className="container">
-          <Button waves="light" left>
+          <Button waves="light" left onClick={this.handleClick}>
             Submit
           </Button>
         </div>

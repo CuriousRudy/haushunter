@@ -1,6 +1,6 @@
-import React from 'react';
-import Appointment from '../components/Appointment';
-import api from '../services/api';
+import React from "react";
+import Appointment from "../components/Appointment";
+import api from "../services/api";
 
 export default class AppointmentContainer extends React.Component {
   state = {
