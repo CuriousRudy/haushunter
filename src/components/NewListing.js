@@ -3,7 +3,7 @@ import { Button, Row, Input } from "react-materialize";
 
 class NewListing extends React.Component {
   state = {
-    id: this.props.newListingId + 1,
+    key: this.props.newListingId + 1,
     street_address: "",
     city: "",
     state: "",
@@ -21,11 +21,13 @@ class NewListing extends React.Component {
 
   handleClick = e => {
     e.preventDefault();
+    // console.log(this.state);
     this.props.createNewListing(this.state);
   };
 
   //a simple materialize form to add a listing, hidden in a little tab
   render() {
+    // console.log(this.state);
     return (
       <Row>
         <Input

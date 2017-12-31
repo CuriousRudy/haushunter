@@ -11,12 +11,10 @@ export default class ListingContainer extends React.Component {
   //on mount, set state with the listings props
   componentDidMount = () => {
     api.listings.getListings().then(listings => this.setState({ listings }));
-    this.newListingId();
   };
 
-  newListingId = () => {
-    this.state.listings.length + 1;
-  };
+  //componentdidreceiveprops?
+  newListingId = this.state.listings.length + 1;
 
   createNewListing = listing => {
     const options = {
@@ -31,13 +29,7 @@ export default class ListingContainer extends React.Component {
     fetch("http://localhost:3000/api/v1/listings", options)
       .then(res => res.json())
       .then(console.log)
-      .then(listing => {
-        this.setState(prevState => {
-          return {
-            listings: [...prevState.listings, listing]
-          };
-        });
-      });
+      .then(this.forceUpdate());
   };
 
   createNewAppointment = appointment => {
@@ -65,6 +57,7 @@ export default class ListingContainer extends React.Component {
   //we get the listings
   render() {
     console.log(this.props);
+    console.log(this.newListingId);
     const listings = this.state.listings.map(listing => {
       return (
         <Listing
