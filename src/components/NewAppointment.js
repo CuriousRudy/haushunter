@@ -22,8 +22,6 @@ class NewAppointment extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
-    debugger;
     this.props.createAppointment(this.state);
   };
 

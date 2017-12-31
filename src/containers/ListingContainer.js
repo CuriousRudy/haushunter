@@ -14,7 +14,6 @@ export default class ListingContainer extends React.Component {
   };
 
   //componentdidreceiveprops?
-  newListingId = this.state.listings.length + 1;
 
   createNewListing = listing => {
     const options = {
@@ -28,11 +27,10 @@ export default class ListingContainer extends React.Component {
 
     fetch("http://localhost:3000/api/v1/listings", options)
       .then(res => res.json())
-      .then(console.log)
       .then(this.forceUpdate());
   };
 
-  createNewAppointment = appointment => {
+  createNewListing = appointment => {
     const options = {
       headers: {
         "Content-Type": "application/json",
@@ -44,20 +42,11 @@ export default class ListingContainer extends React.Component {
 
     fetch("http://localhost:3000/api/v1/appointments", options)
       .then(res => res.json())
-      .then(console.log)
-      .then(appointment => {
-        this.setState(prevState => {
-          return {
-            appointments: [...prevState.appointments, appointment]
-          };
-        });
-      });
+      .then(this.forceUpdate());
   };
 
   //we get the listings
   render() {
-    console.log(this.props);
-    console.log(this.newListingId);
     const listings = this.state.listings.map(listing => {
       return (
         <Listing
@@ -65,7 +54,6 @@ export default class ListingContainer extends React.Component {
           userId={this.props.userId}
           listing={listing}
           createNewAppointment={this.createNewAppointment}
-          newAppointmentId={this.newAppointmentId}
         />
       );
     });
