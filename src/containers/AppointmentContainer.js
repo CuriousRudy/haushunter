@@ -9,7 +9,7 @@ export default class AppointmentContainer extends React.Component {
   //on mount, set state with the appointments props
   componentDidMount = () => {
     api.appointments
-      .getAppointments(this.props.userId)
+      .getAppointments(this.props.thisUser.id)
       .then(appointments => this.setState({ appointments }));
   };
 
@@ -29,9 +29,7 @@ export default class AppointmentContainer extends React.Component {
   };
   //we get the appointments
   render() {
-    <h1>I'm here!</h1>;
-    // console.log(this.state.appointments);
-    // console.log(this.props.appointments[0].notes);
+    console.log("appointmentscontroller", this.state);
     const appointments = this.state.appointments.map(appointment => {
       return (
         <Appointment

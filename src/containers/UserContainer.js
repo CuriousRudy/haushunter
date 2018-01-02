@@ -34,10 +34,15 @@ export default class UserContainer extends React.Component {
     //   ) : (
     //     <ListingContainer userId={this.state.thisUser.id} />
     //   );
-
+    console.log("usercontroller", this.state);
     return (
       <div className="container">
-        <Route path="/appointments" component={AppointmentContainer} />
+        <Route
+          path="/appointments"
+          render={() => {
+            return <AppointmentContainer thisUser={this.state.thisUser} />;
+          }}
+        />
         <Route path="/listings" component={ListingContainer} />
       </div>
     );

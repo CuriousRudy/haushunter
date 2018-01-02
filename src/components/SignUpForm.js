@@ -49,7 +49,7 @@ export default class SignUpForm extends React.Component {
               // onClick={this.props.createNewUser(this.state)}
               waves="light"
             >
-              Log In
+              Sign Up
             </Button>
           </div>
         </div>

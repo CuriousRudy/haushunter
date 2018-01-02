@@ -14,9 +14,9 @@ class App extends React.Component {
     thisUser: {}
   };
   //loads all users so we can check if we are logging in
-  componentDidMount = () => {
-    api.users.getUsers().then(allUsers => this.setState({ allUsers }));
-  };
+  // componentDidMount = () => {
+  //   api.users.getUsers().then(allUsers => this.setState({ allUsers }));
+  // };
 
   //sets the filter toggle to listings
   // viewListings = e => {
