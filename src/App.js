@@ -11,36 +11,57 @@ class App extends React.Component {
     loggedIn: false,
     thisUser: {}
   };
-  //loads all users so we can check if we are logging in
+
+  // componentDidMount = () => {
+  //   api.users.getUsers().then(allUsers => this.setState({ allUsers }));
+  // };
+
+  //add new component did mount, to check localStorage and see if token is there
   componentDidMount = () => {
-    api.users.getUsers().then(allUsers => this.setState({ allUsers }));
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.auth.getCurrentUser().then(user => {
+        this.setState({ thisUser: user });
+      });
+    }
   };
 
   //sets the filter toggle to listings
-  viewListings = e => {
-    e.preventDefault();
-    return this.state.containerToggle === 'appointments' ||
-      this.state.containerToggle === ''
-      ? this.setState({ containerToggle: 'listings' })
-      : null;
-  };
-  //sets the filter toggle to appointments
-  viewAppointments = e => {
-    e.preventDefault();
-    return this.state.containerToggle === 'listings' ||
-      this.state.containerToggle === ''
-      ? this.setState({ containerToggle: 'appointments' })
-      : null;
-  };
+  // viewListings = e => {
+  //   e.preventDefault();
+  //   return this.state.containerToggle === 'appointments' ||
+  //     this.state.containerToggle === ''
+  //     ? this.setState({ containerToggle: 'listings' })
+  //     : null;
+  // };
+  // //sets the filter toggle to appointments
+  // viewAppointments = e => {
+  //   e.preventDefault();
+  //   return this.state.containerToggle === 'listings' ||
+  //     this.state.containerToggle === ''
+  //     ? this.setState({ containerToggle: 'appointments' })
+  //     : null;
+  // };
 
   //callback in loginform to set the loggedIn to true, and send the userId down
-  logIn = arg => {
+  // logIn = arg => {
+  //   return e => {
+  //     e.preventDefault();
+  //     const user = this.state.allUsers.find(user => {
+  //       return user.email === arg;
+  //     });
+  //     this.setState({ thisUser: user, loggedIn: true });
+  //   };
+  // };
+
+  login = (email, pass) => {
     return e => {
       e.preventDefault();
-      const user = this.state.allUsers.find(user => {
-        return user.email === arg;
+      api.auth.logIn(email, pass).then(user => {
+        console.log(user);
+        localStorage.setItem('token', user.token);
+        this.setState({ thisUser: user });
       });
-      this.setState({ thisUser: user, loggedIn: true });
     };
   };
 
@@ -51,10 +72,12 @@ class App extends React.Component {
     this.setState({
       thisUser: {}
     });
+    //delete the token from localStorage
   };
 
   //built in logic to load the login form first, and hide it after you sign in
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         <Navbar brand="HausHuntr" right>
@@ -81,7 +104,7 @@ class App extends React.Component {
           />
         ) : (
           <div className="container">
-            <LoginForm logIn={this.logIn} />
+            <LoginForm logIn={this.login} />
           </div>
         )}
       </div>

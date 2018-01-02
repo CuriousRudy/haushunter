@@ -8,21 +8,21 @@ export default class UserContainer extends React.Component {
     super();
 
     this.state = {
-      thisUser: {},
+      userId: {},
       containerState: '',
       loading: true
     };
   }
   componentDidMount = () => {
     this.setState({
-      thisUser: this.props.thisUser
+      userId: this.props.userId
     });
   };
-
-  //updates the toggle status for the filter
-  componentWillReceiveProps = nextProps => {
-    this.setState({ containerState: nextProps.containerState });
-  };
+  //
+  // //updates the toggle status for the filter
+  // componentWillReceiveProps = nextProps => {
+  //   this.setState({ containerState: nextProps.containerState });
+  // };
 
   //pass our resource directly down to the AppointmentContainer
   render() {

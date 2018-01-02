@@ -14,7 +14,7 @@ export default class ListingContainer extends React.Component {
   };
   //we get the listings
   render() {
-    console.log(this.props);
+    console.log(this.props.userId);
     const listings = this.state.listings.map(listing => {
       return (
         <Listing
@@ -28,7 +28,7 @@ export default class ListingContainer extends React.Component {
       <div className="container">
         <br />
         <Tabs className="tab-demo z-depth-0">
-          <Tab title="All Listings" active="true">
+          <Tab title="All Listings" active>
             {listings}
           </Tab>
           <Tab title="Add a Listing">
