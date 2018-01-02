@@ -3,7 +3,7 @@ import api from "./services/api";
 import { Navbar, NavItem } from "react-materialize";
 import UserContainer from "./containers/UserContainer";
 import LoginForm from "./components/LogInForm";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -58,8 +58,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar brand="HausHuntr" right>
-          <BrowserRouter>
+        <BrowserRouter>
+          <Navbar brand="HausHuntr" right>
             <Route exact path="/appointments">
               <NavItem
                 onClick={this.viewAppointments}
@@ -85,8 +85,8 @@ class App extends React.Component {
                 </NavItem>
               ) : null}
             </Route>
-          </BrowserRouter>
-        </Navbar>
+          </Navbar>
+        </BrowserRouter>
         {this.state.loggedIn === true ? (
           <UserContainer
             thisUser={this.state.thisUser}
@@ -94,7 +94,11 @@ class App extends React.Component {
           />
         ) : (
           <div className="container">
-            <LoginForm logIn={this.logIn} />
+            <BrowserRouter>
+              <Route exact path="/login">
+                <LoginForm logIn={this.logIn} />
+              </Route>
+            </BrowserRouter>
           </div>
         )}
       </div>
