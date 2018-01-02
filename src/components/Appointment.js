@@ -1,11 +1,6 @@
 import React from "react";
-import { Collapsible, CollapsibleItem } from "react-materialize";
+import { Collapsible, CollapsibleItem, Button } from "react-materialize";
 import NoteContainer from "../containers/NoteContainer";
-
-onClick = e => {
-  e.preventDefault();
-  this.props.deleteAppointment(this.props.appointment);
-};
 
 const Appointment = props => {
   return (
@@ -22,7 +17,7 @@ const Appointment = props => {
         </CollapsibleItem>
       </Collapsible>
       <p>
-        <Button onClick={this.handleClick} />
+        <Button onClick={this.props.deleteAppointment} />
       </p>
     </div>
   );

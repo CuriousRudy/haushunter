@@ -8,12 +8,6 @@ import {
 } from "react-materialize";
 import NewAppointment from "./NewAppointment";
 
-handleClick = e => {
-  e.preventDefault();
-  // console.log(this.state);
-  props.deleteListing(props.listing);
-};
-
 const Listing = props => {
   const card = (
     <Collapsible defaultActiveKey={0}>
@@ -47,7 +41,7 @@ const Listing = props => {
       >
         <p>
           <a href="/">See in Maps</a>
-          <Button onClick={this.handleClick} />
+          <Button onClick={props.deleteListing} />
         </p>
       </Card>
     </div>
