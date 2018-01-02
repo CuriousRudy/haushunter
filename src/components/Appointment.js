@@ -17,7 +17,7 @@ const Appointment = props => {
         </CollapsibleItem>
       </Collapsible>
       <p>
-        <Button onClick={props.deleteAppointment} />
+        <Button onClick={props.deleteAppointment}>Delete Appointment</Button>
       </p>
     </div>
   );

@@ -1,15 +1,15 @@
 import React from "react";
 import api from "./services/api";
-import { Navbar, NavItem } from "react-materialize";
+import { Row, Col, Navbar, NavItem } from "react-materialize";
+import { Link } from "react-router-dom";
 import UserContainer from "./containers/UserContainer";
 import LoginForm from "./components/LogInForm";
-import { Link, Route } from "react-router-dom";
 import SignUpForm from "./components/SignUpForm";
 
 class App extends React.Component {
   state = {
     allUsers: [],
-    containerToggle: "",
+    // containerToggle: "",
     loggedIn: false,
     thisUser: {}
   };
@@ -19,21 +19,21 @@ class App extends React.Component {
   };
 
   //sets the filter toggle to listings
-  viewListings = e => {
-    e.preventDefault();
-    return this.state.containerToggle === "appointments" ||
-      this.state.containerToggle === ""
-      ? this.setState({ containerToggle: "listings" })
-      : null;
-  };
-  //sets the filter toggle to appointments
-  viewAppointments = e => {
-    e.preventDefault();
-    return this.state.containerToggle === "listings" ||
-      this.state.containerToggle === ""
-      ? this.setState({ containerToggle: "appointments" })
-      : null;
-  };
+  // viewListings = e => {
+  //   e.preventDefault();
+  //   return this.state.containerToggle === "appointments" ||
+  //     this.state.containerToggle === ""
+  //     ? this.setState({ containerToggle: "listings" })
+  //     : null;
+  // };
+  // //sets the filter toggle to appointments
+  // viewAppointments = e => {
+  //   e.preventDefault();
+  //   return this.state.containerToggle === "listings" ||
+  //     this.state.containerToggle === ""
+  //     ? this.setState({ containerToggle: "appointments" })
+  //     : null;
+  // };
 
   //callback in loginform to set the loggedIn to true, and send the userId down
   logIn = arg => {
@@ -74,37 +74,37 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar brand="HausHuntr" right>
-          <NavItem
-            onClick={this.viewAppointments}
-            name="appointments"
-            href="/appointments"
-          >
-            <Link to="/appointments">Appointments</Link>
-          </NavItem>
-
-          <NavItem onClick={this.viewListings} name="listings" href="/listings">
-            <Link to="/listings">Listings</Link>
-          </NavItem>
-
-          {this.state.loggedIn === true ? (
-            <NavItem onClick={this.logOut} name="logout">
-              Log Out
-            </NavItem>
-          ) : null}
-        </Navbar>
         {this.state.loggedIn === true ? (
-          <UserContainer
-            thisUser={this.state.thisUser}
-            containerState={this.state.containerToggle}
-          />
+          <div className="LoggedIn">
+            <Navbar brand="HausHuntr" right>
+              <NavItem onClick={this.logOut} name="logout">
+                Log Out
+              </NavItem>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <Link to="/appointments">Appointments</Link>
+                </li>
+                <li>
+                  <Link to="/listings">Listings</Link>
+                </li>
+              </ul>
+            </Navbar>
+            <UserContainer thisUser={this.state.thisUser} />
+          </div>
         ) : (
-          <Link to="/login">
+          <div className="LoggedOut">
+            <Navbar brand="HausHuntr" right />
             <div className="container">
-              <SignUpForm createNewUser={this.createNewUser} />
-              <LoginForm logIn={this.logIn} />
+              <Row>
+                <Col s={6}>
+                  <SignUpForm createNewUser={this.createNewUser} />
+                </Col>
+                <Col s={6}>
+                  <LoginForm logIn={this.logIn} />
+                </Col>
+              </Row>
             </div>
-          </Link>
+          </div>
         )}
       </div>
     );

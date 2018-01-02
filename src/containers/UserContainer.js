@@ -1,6 +1,8 @@
 import React from "react";
 import AppointmentContainer from "./AppointmentContainer";
 import ListingContainer from "./ListingContainer";
+import { Route } from "react-router-dom";
+
 // import { Col, ProgressBar, Row } from 'react-materialize';
 
 export default class UserContainer extends React.Component {
@@ -9,7 +11,6 @@ export default class UserContainer extends React.Component {
 
     this.state = {
       thisUser: {},
-      containerState: "",
       loading: true
     };
   }
@@ -20,33 +21,24 @@ export default class UserContainer extends React.Component {
   };
 
   //updates the toggle status for the filter
-  componentWillReceiveProps = nextProps => {
-    this.setState({ containerState: nextProps.containerState });
-  };
+  // componentWillReceiveProps = nextProps => {
+  //   this.setState({ containerState: nextProps.containerState });
+  // };
 
   //pass our resource directly down to the AppointmentContainer
   render() {
     // console.log(this.state, this.props);
-    const containerSwitch =
-      this.state.containerState === "appointments" ? (
-        <AppointmentContainer userId={this.state.thisUser.id} />
-      ) : (
-        <ListingContainer userId={this.state.thisUser.id} />
-      );
+    // const containerSwitch =
+    //   this.state.containerState === "appointments" ? (
+    //     <AppointmentContainer userId={this.state.thisUser.id} />
+    //   ) : (
+    //     <ListingContainer userId={this.state.thisUser.id} />
+    //   );
 
     return (
-      <div className="row">
-        {
-          //   this.state.loading ? (
-          //   <Row>
-          //     <Col s={12}>
-          //       <ProgressBar />
-          //     </Col>
-          //   </Row>
-          // ) : (
-          containerSwitch
-          // )
-        }
+      <div className="container">
+        <Route path="/appointments" component={AppointmentContainer} />
+        <Route path="/listings" component={ListingContainer} />
       </div>
     );
   }

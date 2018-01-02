@@ -41,7 +41,7 @@ const Listing = props => {
       >
         <p>
           <a href="/">See in Maps</a>
-          <Button onClick={props.deleteListing} />
+          <Button onClick={props.deleteListing}>Delete Listing</Button>
         </p>
       </Card>
     </div>

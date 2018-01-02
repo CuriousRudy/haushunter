@@ -29,6 +29,7 @@ export default class AppointmentContainer extends React.Component {
   };
   //we get the appointments
   render() {
+    <h1>I'm here!</h1>;
     // console.log(this.state.appointments);
     // console.log(this.props.appointments[0].notes);
     const appointments = this.state.appointments.map(appointment => {

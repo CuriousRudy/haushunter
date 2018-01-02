@@ -8,7 +8,7 @@ export default class LoginForm extends React.Component {
   };
   handleChange = e => {
     this.setState({
-      email: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -24,6 +24,8 @@ export default class LoginForm extends React.Component {
               label="Email"
               value={this.state.email}
               validate
+              name="email"
+              type="email"
             >
               <Icon>email</Icon>
             </Input>
@@ -35,6 +37,8 @@ export default class LoginForm extends React.Component {
               label="Password"
               value={this.state.password}
               validate
+              type="password"
+              name="password"
             >
               <Icon>enhanced_encryption</Icon>
             </Input>
