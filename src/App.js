@@ -8,15 +8,8 @@ import SignUpForm from './components/SignUpForm';
 
 class App extends React.Component {
   state = {
-    allUsers: [],
-    // containerToggle: "",
-    loggedIn: false,
     thisUser: {}
   };
-
-  // componentDidMount = () => {
-  //   api.users.getUsers().then(allUsers => this.setState({ allUsers }));
-  // };
 
   //add new component did mount, to check localStorage and see if token is there
   componentDidMount = () => {
@@ -28,39 +21,11 @@ class App extends React.Component {
     }
   };
 
-  //sets the filter toggle to listings
-  // viewListings = e => {
-  //   e.preventDefault();
-  //   return this.state.containerToggle === 'appointments' ||
-  //     this.state.containerToggle === ''
-  //     ? this.setState({ containerToggle: 'listings' })
-  //     : null;
-  // };
-  // //sets the filter toggle to appointments
-  // viewAppointments = e => {
-  //   e.preventDefault();
-  //   return this.state.containerToggle === 'listings' ||
-  //     this.state.containerToggle === ''
-  //     ? this.setState({ containerToggle: 'appointments' })
-  //     : null;
-  // };
-
-  //callback in loginform to set the loggedIn to true, and send the userId down
-  // logIn = arg => {
-  //   return e => {
-  //     e.preventDefault();
-  //     const user = this.state.allUsers.find(user => {
-  //       return user.email === arg;
-  //     });
-  //     this.setState({ thisUser: user, loggedIn: true });
-  //   };
-  // };
-
   login = (email, pass) => {
     return e => {
       e.preventDefault();
       api.auth.logIn(email, pass).then(user => {
-        console.log(user);
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!', user);
         localStorage.setItem('token', user.token);
         this.setState({ thisUser: user });
       });
@@ -68,12 +33,7 @@ class App extends React.Component {
   };
 
   logOut = () => {
-    this.setState({
-      loggedIn: false
-    });
-    this.setState({
-      thisUser: {}
-    });
+    localStorage.removeItem('token');
     //delete the token from localStorage
   };
 
@@ -87,23 +47,23 @@ class App extends React.Component {
       body: JSON.stringify({ users: users })
     };
 
-    fetch('http://localhost:3000/api/v1/userss', options)
+    fetch('http://localhost:3000/api/v1/users', options)
       .then(res => res.json())
       .then(this.forceUpdate());
   };
 
   //built in logic to load the login form first, and hide it after you sign in
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div className="App">
-        {this.state.loggedIn === true ? (
+        {this.state.thisUser.id ? (
           <div className="LoggedIn">
             <Navbar brand="HausHuntr" right>
               <NavItem onClick={this.logOut} name="logout">
                 Log Out
               </NavItem>
-              <ul class="right hide-on-med-and-down">
+              <ul className="right hide-on-med-and-down">
                 <li>
                   <Link to="/appointments">Appointments</Link>
                 </li>
@@ -123,7 +83,7 @@ class App extends React.Component {
                   <SignUpForm createNewUser={this.createNewUser} />
                 </Col>
                 <Col s={6}>
-                  <LoginForm logIn={this.logIn} />
+                  <LoginForm logIn={this.login} />
                 </Col>
               </Row>
             </div>

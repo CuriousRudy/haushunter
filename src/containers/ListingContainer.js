@@ -8,12 +8,13 @@ export default class ListingContainer extends React.Component {
   state = {
     listings: []
   };
-  //on mount, set state with the listings props
-  componentDidMount = () => {
-    api.listings.getListings().then(listings => this.setState({ listings }));
-  };
 
-  //componentdidreceiveprops?
+  componentDidMount = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.listings.getListings().then(listings => this.setState({ listings }));
+    }
+  };
 
   createNewListing = listing => {
     const options = {

@@ -1,16 +1,16 @@
-import React from "react";
-import { Button, Row, Input } from "react-materialize";
+import React from 'react';
+import { Button, Row, Input } from 'react-materialize';
 
 class NewListing extends React.Component {
   state = {
     key: this.props.newListingId + 1,
-    street_address: "",
-    city: "",
-    state: "",
-    zip: "",
-    beds: "",
-    baths: "",
-    asking_price: ""
+    street_address: '',
+    city: '',
+    state: '',
+    zip: '',
+    beds: '',
+    baths: '',
+    asking_price: ''
   };
 
   updateState = e => {
@@ -85,7 +85,7 @@ class NewListing extends React.Component {
           s={5}
         />
         <div className="container">
-          <Button waves="light" left onClick={this.handleClick}>
+          <Button waves="light" left="true" onClick={this.handleClick}>
             Submit
           </Button>
         </div>

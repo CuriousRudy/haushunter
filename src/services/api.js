@@ -1,14 +1,16 @@
 const API_ROOT = 'http://localhost:3000/api/v1';
-const token = localStorage.getItem('token');
 
-const headers = {
-  'Content-Type': 'application/json',
-  Accept: 'application/json',
-  Authorization: token
+const getHeaders = () => {
+  const token = localStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: token
+  };
 };
 
 const getUsers = () => {
-  return fetch(`${API_ROOT}/users`, { headers: headers }).then(res =>
+  return fetch(`${API_ROOT}/users`, { headers: getHeaders() }).then(res =>
     res.json()
   );
 };
@@ -16,23 +18,19 @@ const getUsers = () => {
 const addListing = newListing => {
   return fetch(`${API_ROOT}`, {
     method: 'POST',
-    headers: headers,
+    headers: getHeaders(),
     body: JSON.stringify({ newListing })
   }).then(res => res.json());
 };
 
-const getAppointments = userId => {
-  return fetch(`${API_ROOT}/appointments`)
-    .then(res => res.json())
-    .then(appts =>
-      appts.filter(appt => {
-        return appt.user_id === userId;
-      })
-    );
+const getAppointments = () => {
+  return fetch(`${API_ROOT}/appointments`, {
+    headers: { Authorization: localStorage.getItem('token') }
+  }).then(res => res.json());
 };
 
 const getListings = () => {
-  return fetch(`${API_ROOT}/listings`, { headers: headers }).then(res =>
+  return fetch(`${API_ROOT}/listings`, { headers: getHeaders() }).then(res =>
     res.json()
   );
 };
@@ -40,14 +38,17 @@ const getListings = () => {
 const logIn = (email, password) => {
   return fetch(`${API_ROOT}/auth`, {
     method: 'POST',
-    headers: headers,
+    headers: {
+      accept: 'application/json',
+      'Content-type': 'application/JSON'
+    },
     body: JSON.stringify({ email: email, password: password })
   }).then(res => res.json());
 };
 
 const getCurrentUser = () => {
   return fetch(`${API_ROOT}/current_user`, {
-    headers: headers
+    headers: getHeaders()
   }).then(res => res.json());
 };
 

@@ -6,14 +6,9 @@ export default class LoginForm extends React.Component {
     email: '',
     password: ''
   };
-  changeEmail = e => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    });
-  };
-  changePass = e => {
-    this.setState({
-      password: e.target.value
     });
   };
 
@@ -51,7 +46,7 @@ export default class LoginForm extends React.Component {
           <div className="container">
             <Button
               s={5}
-              onClick={this.props.logIn(this.state.email)}
+              onClick={this.props.logIn(this.state.email, this.state.password)}
               waves="light"
             >
               Log In
