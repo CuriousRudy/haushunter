@@ -12,6 +12,21 @@ export default class AppointmentContainer extends React.Component {
       .getAppointments(this.props.userId)
       .then(appointments => this.setState({ appointments }));
   };
+
+  deleteAppointment = appointment => {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      method: "DELETE",
+      body: JSON.stringify({ appointment: appointment })
+    };
+
+    fetch("http://localhost:3000/api/v1/appointments", options)
+      .then(res => res.json())
+      .then(this.forceUpdate());
+  };
   //we get the appointments
   render() {
     // console.log(this.state.appointments);
@@ -22,6 +37,7 @@ export default class AppointmentContainer extends React.Component {
           notes={appointment.notes}
           key={appointment.id}
           appointment={appointment}
+          deleteAppointment={this.deleteAppointment}
         />
       );
     });

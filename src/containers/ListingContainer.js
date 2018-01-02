@@ -45,6 +45,21 @@ export default class ListingContainer extends React.Component {
       .then(this.forceUpdate());
   };
 
+  deleteListing = listing => {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      method: "DELETE",
+      body: JSON.stringify({ listing: listing })
+    };
+
+    fetch("http://localhost:3000/api/v1/listings", options)
+      .then(res => res.json())
+      .then(this.forceUpdate());
+  };
+
   //we get the listings
   render() {
     const listings = this.state.listings.map(listing => {
@@ -54,6 +69,7 @@ export default class ListingContainer extends React.Component {
           userId={this.props.userId}
           listing={listing}
           createNewAppointment={this.createNewAppointment}
+          deleteListing={this.deleteListing}
         />
       );
     });

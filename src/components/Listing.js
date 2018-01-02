@@ -3,9 +3,16 @@ import {
   Card,
   CardTitle,
   Collapsible,
-  CollapsibleItem
+  CollapsibleItem,
+  Button
 } from "react-materialize";
 import NewAppointment from "./NewAppointment";
+
+handleClick = e => {
+  e.preventDefault();
+  // console.log(this.state);
+  props.deleteListing(props.listing);
+};
 
 const Listing = props => {
   const card = (
@@ -40,6 +47,7 @@ const Listing = props => {
       >
         <p>
           <a href="/">See in Maps</a>
+          <Button onClick={this.handleClick} />
         </p>
       </Card>
     </div>
