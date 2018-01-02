@@ -1,6 +1,6 @@
-import React from 'react';
-import AppointmentContainer from './AppointmentContainer';
-import ListingContainer from './ListingContainer';
+import React from "react";
+import AppointmentContainer from "./AppointmentContainer";
+import ListingContainer from "./ListingContainer";
 // import { Col, ProgressBar, Row } from 'react-materialize';
 
 export default class UserContainer extends React.Component {
@@ -9,7 +9,7 @@ export default class UserContainer extends React.Component {
 
     this.state = {
       thisUser: {},
-      containerState: '',
+      containerState: "",
       loading: true
     };
   }
@@ -28,7 +28,7 @@ export default class UserContainer extends React.Component {
   render() {
     // console.log(this.state, this.props);
     const containerSwitch =
-      this.state.containerState === 'appointments' ? (
+      this.state.containerState === "appointments" ? (
         <AppointmentContainer userId={this.state.thisUser.id} />
       ) : (
         <ListingContainer userId={this.state.thisUser.id} />

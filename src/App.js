@@ -3,7 +3,8 @@ import api from "./services/api";
 import { Navbar, NavItem } from "react-materialize";
 import UserContainer from "./containers/UserContainer";
 import LoginForm from "./components/LogInForm";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
+import SignUpForm from "./components/SignUpForm";
 
 class App extends React.Component {
   state = {
@@ -54,52 +55,56 @@ class App extends React.Component {
     });
   };
 
+  createNewUser = users => {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify({ users: users })
+    };
+
+    fetch("http://localhost:3000/api/v1/userss", options)
+      .then(res => res.json())
+      .then(this.forceUpdate());
+  };
+
   //built in logic to load the login form first, and hide it after you sign in
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
-          <Navbar brand="HausHuntr" right>
-            <Route exact path="/appointments">
-              <NavItem
-                onClick={this.viewAppointments}
-                name="appointments"
-                href="/appointments"
-              >
-                Appointments
-              </NavItem>
-            </Route>
-            <Route exact path="/listings">
-              <NavItem
-                onClick={this.viewListings}
-                name="listings"
-                href="/listings"
-              >
-                Listings
-              </NavItem>
-            </Route>
-            <Route exact path="/logout">
-              {this.state.loggedIn === true ? (
-                <NavItem onClick={this.logOut} name="logout">
-                  Log Out
-                </NavItem>
-              ) : null}
-            </Route>
-          </Navbar>
-        </BrowserRouter>
+        <Navbar brand="HausHuntr" right>
+          <NavItem
+            onClick={this.viewAppointments}
+            name="appointments"
+            href="/appointments"
+          >
+            <Link to="/appointments">Appointments</Link>
+          </NavItem>
+
+          <NavItem onClick={this.viewListings} name="listings" href="/listings">
+            <Link to="/listings">Listings</Link>
+          </NavItem>
+
+          {this.state.loggedIn === true ? (
+            <NavItem onClick={this.logOut} name="logout">
+              Log Out
+            </NavItem>
+          ) : null}
+        </Navbar>
         {this.state.loggedIn === true ? (
           <UserContainer
             thisUser={this.state.thisUser}
             containerState={this.state.containerToggle}
           />
         ) : (
-          <div className="container">
-            <BrowserRouter>
-              <Route exact path="/login">
-                <LoginForm logIn={this.logIn} />
-              </Route>
-            </BrowserRouter>
-          </div>
+          <Link to="/login">
+            <div className="container">
+              <SignUpForm createNewUser={this.createNewUser} />
+              <LoginForm logIn={this.logIn} />
+            </div>
+          </Link>
         )}
       </div>
     );

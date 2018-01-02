@@ -30,7 +30,7 @@ export default class ListingContainer extends React.Component {
       .then(this.forceUpdate());
   };
 
-  createNewListing = appointment => {
+  createNewAppointment = appointment => {
     const options = {
       headers: {
         "Content-Type": "application/json",

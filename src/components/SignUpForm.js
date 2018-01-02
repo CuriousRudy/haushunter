@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Input, Icon, Button } from "react-materialize";
 
-export default class LoginForm extends React.Component {
+export default class SignUpForm extends React.Component {
   state = {
     email: "",
     password: ""
@@ -15,8 +15,8 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="signIn">
-          <h3>Sign In:</h3>
+        <div className="signUp">
+          <h3>Sign Up:</h3>
           <Row>
             <Input
               onChange={this.handleChange}
@@ -42,7 +42,7 @@ export default class LoginForm extends React.Component {
           <div className="container">
             <Button
               s={5}
-              onClick={this.props.logIn(this.state.email)}
+              onClick={this.props.createNewUser(this.state)}
               waves="light"
             >
               Log In
