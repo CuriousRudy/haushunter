@@ -1,10 +1,10 @@
-import React from "react";
-import api from "./services/api";
-import { Row, Col, Navbar, NavItem } from "react-materialize";
-import { Link } from "react-router-dom";
-import UserContainer from "./containers/UserContainer";
-import LoginForm from "./components/LogInForm";
-import SignUpForm from "./components/SignUpForm";
+import React from 'react';
+import api from './services/api';
+import { Row, Col, Navbar, NavItem } from 'react-materialize';
+import { Link } from 'react-router-dom';
+import UserContainer from './containers/UserContainer';
+import LoginForm from './components/LogInForm';
+import SignUpForm from './components/SignUpForm';
 
 class App extends React.Component {
   state = {
@@ -13,36 +13,57 @@ class App extends React.Component {
     loggedIn: false,
     thisUser: {}
   };
-  //loads all users so we can check if we are logging in
+
   // componentDidMount = () => {
   //   api.users.getUsers().then(allUsers => this.setState({ allUsers }));
   // };
 
+  //add new component did mount, to check localStorage and see if token is there
+  componentDidMount = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.auth.getCurrentUser().then(user => {
+        this.setState({ thisUser: user });
+      });
+    }
+  };
+
   //sets the filter toggle to listings
   // viewListings = e => {
   //   e.preventDefault();
-  //   return this.state.containerToggle === "appointments" ||
-  //     this.state.containerToggle === ""
-  //     ? this.setState({ containerToggle: "listings" })
+  //   return this.state.containerToggle === 'appointments' ||
+  //     this.state.containerToggle === ''
+  //     ? this.setState({ containerToggle: 'listings' })
   //     : null;
   // };
   // //sets the filter toggle to appointments
   // viewAppointments = e => {
   //   e.preventDefault();
-  //   return this.state.containerToggle === "listings" ||
-  //     this.state.containerToggle === ""
-  //     ? this.setState({ containerToggle: "appointments" })
+  //   return this.state.containerToggle === 'listings' ||
+  //     this.state.containerToggle === ''
+  //     ? this.setState({ containerToggle: 'appointments' })
   //     : null;
   // };
 
   //callback in loginform to set the loggedIn to true, and send the userId down
-  logIn = arg => {
+  // logIn = arg => {
+  //   return e => {
+  //     e.preventDefault();
+  //     const user = this.state.allUsers.find(user => {
+  //       return user.email === arg;
+  //     });
+  //     this.setState({ thisUser: user, loggedIn: true });
+  //   };
+  // };
+
+  login = (email, pass) => {
     return e => {
       e.preventDefault();
-      const user = this.state.allUsers.find(user => {
-        return user.email === arg;
+      api.auth.logIn(email, pass).then(user => {
+        console.log(user);
+        localStorage.setItem('token', user.token);
+        this.setState({ thisUser: user });
       });
-      this.setState({ thisUser: user, loggedIn: true });
     };
   };
 
@@ -53,25 +74,27 @@ class App extends React.Component {
     this.setState({
       thisUser: {}
     });
+    //delete the token from localStorage
   };
 
   createNewUser = users => {
     const options = {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       },
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ users: users })
     };
 
-    fetch("http://localhost:3000/api/v1/userss", options)
+    fetch('http://localhost:3000/api/v1/userss', options)
       .then(res => res.json())
       .then(this.forceUpdate());
   };
 
   //built in logic to load the login form first, and hide it after you sign in
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         {this.state.loggedIn === true ? (

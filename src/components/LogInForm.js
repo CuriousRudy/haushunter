@@ -1,14 +1,19 @@
-import React from "react";
-import { Row, Input, Icon, Button } from "react-materialize";
+import React from 'react';
+import { Row, Input, Icon, Button } from 'react-materialize';
 
 export default class LoginForm extends React.Component {
   state = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   };
-  handleChange = e => {
+  changeEmail = e => {
     this.setState({
       [e.target.name]: e.target.value
+    });
+  };
+  changePass = e => {
+    this.setState({
+      password: e.target.value
     });
   };
 

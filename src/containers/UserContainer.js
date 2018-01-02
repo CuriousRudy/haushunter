@@ -1,7 +1,7 @@
-import React from "react";
-import AppointmentContainer from "./AppointmentContainer";
-import ListingContainer from "./ListingContainer";
-import { Route } from "react-router-dom";
+import React from 'react';
+import AppointmentContainer from './AppointmentContainer';
+import ListingContainer from './ListingContainer';
+import { Route } from 'react-router-dom';
 
 // import { Col, ProgressBar, Row } from 'react-materialize';
 
@@ -10,13 +10,14 @@ export default class UserContainer extends React.Component {
     super();
 
     this.state = {
-      thisUser: {},
+      userId: {},
+      containerState: '',
       loading: true
     };
   }
   componentDidMount = () => {
     this.setState({
-      thisUser: this.props.thisUser
+      userId: this.props.userId
     });
   };
 
@@ -34,7 +35,7 @@ export default class UserContainer extends React.Component {
     //   ) : (
     //     <ListingContainer userId={this.state.thisUser.id} />
     //   );
-    console.log("usercontroller", this.state);
+    console.log('usercontroller', this.state);
     return (
       <div className="container">
         <Route
