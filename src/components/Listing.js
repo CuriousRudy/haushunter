@@ -35,7 +35,13 @@ const Listing = props => {
   return (
     <div>
       <Card
-        header={<CardTitle reveal image={'../img/house.jpg'} waves="light" />}
+        header={
+          <CardTitle
+            reveal
+            image={`../img/house${Math.floor(Math.random() * 14)}.jpg`}
+            waves="light"
+          />
+        }
         title={props.listing.street_address}
         reveal={card}
       >

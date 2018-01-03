@@ -34,6 +34,7 @@ class App extends React.Component {
 
   logOut = () => {
     localStorage.removeItem('token');
+    this.setState({ thisUser: {} });
     //delete the token from localStorage
   };
 
