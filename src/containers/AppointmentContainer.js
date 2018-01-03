@@ -30,7 +30,9 @@ export default class AppointmentContainer extends React.Component {
     return fetch(
       `http://localhost:3000/api/v1/appointments/${appointmentId}`,
       options
-    ).then(appointments => this.setState({ appointments: [...appointments] }));
+    )
+      .then(res => res.json())
+      .then(appointments => this.setState({ appointments: [...appointments] }));
   };
 
   //we get the appointments
