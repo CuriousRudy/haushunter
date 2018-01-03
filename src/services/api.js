@@ -52,16 +52,42 @@ const getCurrentUser = () => {
   }).then(res => res.json());
 };
 
+const deleteAppointment = appointmentId => {
+  return fetch(`${API_ROOT}/appointments/${appointmentId}`, {
+    method: 'DELETE',
+    headers: getHeaders()
+  }).then(res => res.json());
+};
+
+const createNewListing = listing => {
+  return fetch(`${API_ROOT}/listings`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ listing })
+  }).then(res => res.json());
+};
+
+const createNewAppointment = appointment => {
+  return fetch(`${API_ROOT}/appointments`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ appointment })
+  }).then(res => res.json());
+};
+
 export default {
   users: {
     getUsers,
     addListing
   },
   appointments: {
-    getAppointments
+    getAppointments,
+    deleteAppointment,
+    createNewAppointment
   },
   listings: {
-    getListings
+    getListings,
+    createNewListing
   },
   auth: {
     logIn,

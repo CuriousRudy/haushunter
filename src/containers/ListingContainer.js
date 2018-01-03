@@ -17,33 +17,15 @@ export default class ListingContainer extends React.Component {
   };
 
   createNewListing = listing => {
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({ listing: listing })
-    };
-
-    fetch('http://localhost:3000/api/v1/listings', options)
-      .then(res => res.json())
-      .then(this.forceUpdate());
+    api.listings
+      .createNewListing(listing)
+      .then(listing =>
+        this.setState({ listings: [...this.state.listings, listing] })
+      );
   };
 
   createNewAppointment = appointment => {
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({ appointment: appointment })
-    };
-
-    fetch('http://localhost:3000/api/v1/appointments', options)
-      .then(res => res.json())
-      .then(this.forceUpdate());
+    api.appointments.createNewAppointment(appointment).then(this.forceUpdate());
   };
 
   deleteListing = listing => {
@@ -63,6 +45,7 @@ export default class ListingContainer extends React.Component {
 
   //we get the listings
   render() {
+    console.log('listing container props', this.props);
     const listings = this.state.listings.map(listing => {
       return (
         <Listing

@@ -1,6 +1,6 @@
 import React from 'react';
 import api from './services/api';
-import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
+import { Button, Row, Col, Navbar } from 'react-materialize';
 import { Link } from 'react-router-dom';
 import UserContainer from './containers/UserContainer';
 import LoginForm from './components/LogInForm';
@@ -67,10 +67,12 @@ class App extends React.Component {
                 <li>
                   <Link to="/listings">Listings</Link>
                 </li>
+                <li>
+                  <Button onClick={this.logOut} name="logout" right="true">
+                    Log Out
+                  </Button>
+                </li>
               </ul>
-              <Button onClick={this.logOut} name="logout" right="true">
-                Log Out
-              </Button>
             </Navbar>
             <UserContainer thisUser={this.state.thisUser} />
           </div>

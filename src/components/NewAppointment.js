@@ -1,12 +1,12 @@
-import React from "react";
-import { Row, Input, Button } from "react-materialize";
+import React from 'react';
+import { Row, Input, Button } from 'react-materialize';
 
 class NewAppointment extends React.Component {
   state = {
-    date: "",
-    time: "",
-    user_id: "",
-    listing_id: ""
+    date: '',
+    time: '',
+    user_id: '',
+    listing_id: ''
   };
 
   componentDidMount() {
@@ -22,10 +22,11 @@ class NewAppointment extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createAppointment(this.state);
+    this.props.createNewAppointment(this.state);
   };
 
   render() {
+    // console.log(this.state)
     return (
       <div className="input-field">
         <Row>

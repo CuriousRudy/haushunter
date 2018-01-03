@@ -36,7 +36,12 @@ export default class UserContainer extends React.Component {
                 return <AppointmentContainer userId={this.state.userId} />;
               }}
             />
-            <Route path="/listings" component={ListingContainer} />
+            <Route
+              path="/listings"
+              render={() => {
+                return <ListingContainer userId={this.state.userId} />;
+              }}
+            />
           </Switch>
         ) : (
           <Row>

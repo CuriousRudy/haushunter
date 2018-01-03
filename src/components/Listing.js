@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardTitle,
   Collapsible,
   CollapsibleItem,
   Button
-} from "react-materialize";
-import NewAppointment from "./NewAppointment";
+} from 'react-materialize';
+import NewAppointment from './NewAppointment';
 
 const Listing = props => {
   const card = (
@@ -26,7 +26,7 @@ const Listing = props => {
       <CollapsibleItem header="Add Appointment" icon="pencil">
         <NewAppointment
           userId={props.userId}
-          createNewListing={props.createNewListing}
+          createNewAppoitnment={props.createNewAppointment}
           listingId={props.listing.id}
         />
       </CollapsibleItem>
@@ -35,7 +35,7 @@ const Listing = props => {
   return (
     <div>
       <Card
-        header={<CardTitle reveal image={"../img/house.jpg"} waves="light" />}
+        header={<CardTitle reveal image={'../img/house.jpg'} waves="light" />}
         title={props.listing.street_address}
         reveal={card}
       >

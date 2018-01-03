@@ -16,28 +16,16 @@ export default class AppointmentContainer extends React.Component {
         .then(appointments => this.setState({ appointments }));
     }
   };
-
+  //send delete request to the api, and reset the state when we get the new list of appointments
   deleteAppointment = appointmentId => {
-    const token = localStorage.getItem('token');
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: token
-      }
-    };
-    return fetch(
-      `http://localhost:3000/api/v1/appointments/${appointmentId}`,
-      options
-    )
-      .then(res => res.json())
+    api.appointments
+      .deleteAppointment(appointmentId)
       .then(appointments => this.setState({ appointments: [...appointments] }));
   };
 
   //we get the appointments
   render() {
-    console.log('Im Rendering', this.state.appointments);
+    // console.log('Im Rendering', this.state.appointments)
     const appointments = this.state.appointments.map(appointment => {
       return (
         <Appointment
