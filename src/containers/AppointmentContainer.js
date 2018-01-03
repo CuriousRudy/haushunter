@@ -23,7 +23,7 @@ export default class AppointmentContainer extends React.Component {
       body: JSON.stringify({ appointment: appointment })
     };
 
-    fetch("http://localhost:3000/api/v1/appointments", options)
+    fetch("http://localhost:3000/api/v1/appointments/", options)
       .then(res => res.json())
       .then(this.forceUpdate());
   };
