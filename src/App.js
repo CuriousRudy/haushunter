@@ -1,6 +1,6 @@
 import React from 'react';
 import api from './services/api';
-import { Row, Col, Navbar, NavItem } from 'react-materialize';
+import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
 import { Link } from 'react-router-dom';
 import UserContainer from './containers/UserContainer';
 import LoginForm from './components/LogInForm';
@@ -60,9 +60,6 @@ class App extends React.Component {
         {this.state.thisUser.id ? (
           <div className="LoggedIn">
             <Navbar brand="HausHuntr" right>
-              <NavItem onClick={this.logOut} name="logout">
-                Log Out
-              </NavItem>
               <ul className="right hide-on-med-and-down">
                 <li>
                   <Link to="/appointments">Appointments</Link>
@@ -71,6 +68,9 @@ class App extends React.Component {
                   <Link to="/listings">Listings</Link>
                 </li>
               </ul>
+              <Button onClick={this.logOut} name="logout" right="true">
+                Log Out
+              </Button>
             </Navbar>
             <UserContainer thisUser={this.state.thisUser} />
           </div>
