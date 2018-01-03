@@ -18,22 +18,12 @@ export default class AppointmentContainer extends React.Component {
   };
 
   deleteAppointment = appointmentId => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const options = {
-      method: 'DELETE',
-      headers: {
-<<<<<<< HEAD
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
       method: "DELETE",
-      body: JSON.stringify({ appointment: appointment })
-    };
-
-    fetch("http://localhost:3000/api/v1/appointments", options)
-=======
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: token
       }
     };
@@ -41,18 +31,13 @@ export default class AppointmentContainer extends React.Component {
       `http://localhost:3000/api/v1/appointments/${appointmentId}`,
       options
     )
->>>>>>> d21a567baa5ece4c5508cd4a7e0c8936470adf8c
       .then(res => res.json())
       .then(appointments => this.setState({ appointments: [...appointments] }));
   };
 
   //we get the appointments
   render() {
-<<<<<<< HEAD
-    console.log("DUUUUUUUUUDE", this.state.appointments);
-=======
-    console.log('Im Rendering', this.state.appointments);
->>>>>>> d21a567baa5ece4c5508cd4a7e0c8936470adf8c
+    console.log("Im Rendering", this.state.appointments);
     const appointments = this.state.appointments.map(appointment => {
       return (
         <Appointment

@@ -7,6 +7,15 @@ import {
   Button
 } from "react-materialize";
 import NewAppointment from "./NewAppointment";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+  isMarkerShown
+} from "react-google-maps";
+import { compose, withProps } from "recompose";
+import Map from "./Map";
 
 const Listing = props => {
   const card = (
@@ -23,15 +32,26 @@ const Listing = props => {
       <CollapsibleItem header="Asking Price" icon="attach_money">
         {`$ ${props.listing.asking_price}.00`}
       </CollapsibleItem>
-      <CollapsibleItem header="Add Appointment" icon="pencil">
+      <CollapsibleItem header="Add Appointment" icon="create">
         <NewAppointment
           userId={props.userId}
-          createNewListing={props.createNewListing}
+          createNewAppointment={props.createNewAppointment}
           listingId={props.listing.id}
+        />
+      </CollapsibleItem>
+      <CollapsibleItem header="View in Map" icon="add_location">
+        <Map
+          props={props.listing}
+          isMarkerShown
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
         />
       </CollapsibleItem>
     </Collapsible>
   );
+
   return (
     <div>
       <Card
@@ -40,7 +60,6 @@ const Listing = props => {
         reveal={card}
       >
         <p>
-          <a href="/">See in Maps</a>
           <Button onClick={props.deleteListing}>Delete Listing</Button>
         </p>
       </Card>
