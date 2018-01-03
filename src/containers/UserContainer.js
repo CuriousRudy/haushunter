@@ -3,6 +3,7 @@ import AppointmentContainer from './AppointmentContainer';
 import ListingContainer from './ListingContainer';
 import { Switch, Route } from 'react-router-dom';
 import { Col, Row, ProgressBar } from 'react-materialize';
+import api from '../services/api';
 
 export default class UserContainer extends React.Component {
   constructor() {
@@ -11,7 +12,8 @@ export default class UserContainer extends React.Component {
     this.state = {
       userId: {},
       containerState: '',
-      loading: true
+      loading: true,
+      appointments: []
     };
   }
   componentDidMount = () => {
@@ -20,7 +22,24 @@ export default class UserContainer extends React.Component {
       this.setState({
         userId: this.props.thisUser.id
       });
+      api.appointments
+        .getAppointments(this.state.userId)
+        .then(appointments => this.setState({ appointments }));
     }
+  };
+
+  createNewAppointment = appointment => {
+    api.appointments
+      .createNewAppointment(appointment)
+      .then(appt =>
+        this.setState({ appointments: [...this.state.appointments, appt] })
+      );
+  };
+
+  deleteAppointment = appointmentId => {
+    api.appointments
+      .deleteAppointment(appointmentId)
+      .then(appointments => this.setState({ appointments: [...appointments] }));
   };
 
   //pass our resource directly down to the AppointmentContainer
@@ -33,13 +52,24 @@ export default class UserContainer extends React.Component {
             <Route
               path="/appointments"
               render={() => {
-                return <AppointmentContainer userId={this.state.userId} />;
+                return (
+                  <AppointmentContainer
+                    deleteAppointment={this.deleteAppointment}
+                    appointments={this.state.appointments}
+                    userId={this.state.userId}
+                  />
+                );
               }}
             />
             <Route
               path="/listings"
               render={() => {
-                return <ListingContainer userId={this.state.userId} />;
+                return (
+                  <ListingContainer
+                    createNewAppointment={this.createNewAppointment}
+                    userId={this.state.userId}
+                  />
+                );
               }}
             />
           </Switch>

@@ -9,6 +9,7 @@ export default class ListingContainer extends React.Component {
     listings: []
   };
 
+  //fetch all the listings when this component mounts- WORKS
   componentDidMount = () => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -16,6 +17,7 @@ export default class ListingContainer extends React.Component {
     }
   };
 
+  //create a new listing form-WORKS
   createNewListing = listing => {
     api.listings
       .createNewListing(listing)
@@ -24,23 +26,11 @@ export default class ListingContainer extends React.Component {
       );
   };
 
-  createNewAppointment = appointment => {
-    api.appointments.createNewAppointment(appointment).then(this.forceUpdate());
-  };
-
-  deleteListing = listing => {
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      method: 'DELETE',
-      body: JSON.stringify({ listing: listing })
-    };
-
-    fetch('http://localhost:3000/api/v1/listings', options)
-      .then(res => res.json())
-      .then(this.forceUpdate());
+  //delete a listing from the page
+  deleteListing = listingId => {
+    api.listings
+      .deleteListing(listingId)
+      .then(listings => this.setState({ listings }));
   };
 
   //we get the listings
@@ -52,7 +42,7 @@ export default class ListingContainer extends React.Component {
           key={listing.id}
           userId={this.props.userId}
           listing={listing}
-          createNewAppointment={this.createNewAppointment}
+          createNewAppointment={this.props.createNewAppointment}
           deleteListing={this.deleteListing}
         />
       );

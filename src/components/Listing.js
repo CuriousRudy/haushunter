@@ -26,7 +26,7 @@ const Listing = props => {
       <CollapsibleItem header="Add Appointment" icon="pencil">
         <NewAppointment
           userId={props.userId}
-          createNewAppoitnment={props.createNewAppointment}
+          createNewAppointment={props.createNewAppointment}
           listingId={props.listing.id}
         />
       </CollapsibleItem>
@@ -40,8 +40,9 @@ const Listing = props => {
         reveal={card}
       >
         <p>
-          <a href="/">See in Maps</a>
-          <Button onClick={props.deleteListing}>Delete Listing</Button>
+          <Button onClick={() => props.deleteListing(props.listing.id)}>
+            Delete Listing
+          </Button>
         </p>
       </Card>
     </div>

@@ -75,6 +75,13 @@ const createNewAppointment = appointment => {
   }).then(res => res.json());
 };
 
+const deleteListing = listingId => {
+  return fetch(`${API_ROOT}/listings/${listingId}`, {
+    method: 'DELETE',
+    headers: getHeaders()
+  }).then(res => res.json());
+};
+
 export default {
   users: {
     getUsers,
@@ -87,7 +94,8 @@ export default {
   },
   listings: {
     getListings,
-    createNewListing
+    createNewListing,
+    deleteListing
   },
   auth: {
     logIn,

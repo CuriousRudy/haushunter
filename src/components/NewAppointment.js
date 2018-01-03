@@ -34,7 +34,7 @@ class NewAppointment extends React.Component {
         </Row>
         <Row>
           {/* //Not rendering as expected */}
-          <input name="timepicker" type="time" onChange={this.handleChange} />
+          <input name="time" type="time" onChange={this.handleChange} />
         </Row>
         <Button onClick={this.handleSubmit} waves="light">
           Make Appointment
