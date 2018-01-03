@@ -17,23 +17,25 @@ export default class AppointmentContainer extends React.Component {
     }
   };
 
-  deleteAppointment = appointment => {
+  deleteAppointment = appointmentId => {
+    const token = localStorage.getItem('token');
     const options = {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      method: 'DELETE',
-      body: JSON.stringify({ appointment: appointment })
+        Accept: 'application/json',
+        Authorization: token
+      }
     };
-
-    fetch('http://localhost:3000/api/v1/appointments', options)
-      .then(res => res.json())
-      .then(this.forceUpdate());
+    return fetch(
+      `http://localhost:3000/api/v1/appointments/${appointmentId}`,
+      options
+    ).then(appointments => this.setState({ appointments: [...appointments] }));
   };
+
   //we get the appointments
   render() {
-    console.log('DUUUUUUUUUDE', this.state.appointments);
+    console.log('Im Rendering', this.state.appointments);
     const appointments = this.state.appointments.map(appointment => {
       return (
         <Appointment
@@ -46,7 +48,13 @@ export default class AppointmentContainer extends React.Component {
     });
     return (
       <div className="container">
-        <div className="row">{appointments}</div>
+        <div className="row">
+          {appointments.length <= 0 ? (
+            <h3>You have no Appointments scheduled </h3>
+          ) : (
+            appointments
+          )}
+        </div>
       </div>
     );
   }

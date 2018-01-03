@@ -60,9 +60,6 @@ class App extends React.Component {
         {this.state.thisUser.id ? (
           <div className="LoggedIn">
             <Navbar brand="HausHuntr" right>
-              <NavItem onClick={this.logOut} name="logout">
-                Log Out
-              </NavItem>
               <ul className="right hide-on-med-and-down">
                 <li>
                   <Link to="/appointments">Appointments</Link>
@@ -71,6 +68,9 @@ class App extends React.Component {
                   <Link to="/listings">Listings</Link>
                 </li>
               </ul>
+              <NavItem onClick={this.logOut} name="logout">
+                Log Out
+              </NavItem>
             </Navbar>
             <UserContainer thisUser={this.state.thisUser} />
           </div>
