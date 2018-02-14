@@ -31,6 +31,17 @@ HausHuntr was built with a few simple, key features:
 "If you'd like to contribute, please fork the repository and use a feature
 branch. Pull requests are warmly welcome."
 
+## Built With
+
+* [React](https://reactjs.org/) - A framework built for web components
+* [Materialize CSS](http://materializecss.com/) - Class based css styling in the Material Design language
+* [React Materialize](react-materialize.github.io/#/) - React components built with material design.
+
+## Authors
+
+* **Liam Killion** - _React Buildout_ - [GitHub](https://github.com/liamkillion)
+* **Abraham Rudy** - _Backend structuring_ - [Github](https://github.com/CuriousRudy)
+
 ## Links
 
 * Repository: https://github.com/CuriousRudy/haushunter
