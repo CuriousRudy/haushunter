@@ -33,7 +33,7 @@ const Listing = props => {
     </Collapsible>
   );
   return (
-    <div>
+    <div className="col s4">
       <Card
         header={
           <CardTitle

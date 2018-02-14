@@ -12,8 +12,6 @@ class Appointment extends React.Component {
 
   render() {
     const target = this.props.appointment.id;
-    const time = this.props.appointment.time.split('2000-01-01T');
-
     return (
       <div className="col s12 m6">
         <Collapsible defaultActiveKey={0}>
@@ -21,7 +19,7 @@ class Appointment extends React.Component {
             {this.props.appointment.date}
           </CollapsibleItem>
           <CollapsibleItem header="Time" icon="access_time">
-            {time}
+            {this.props.appointment.time}
           </CollapsibleItem>
           <CollapsibleItem header="Notes" icon="info">
             <NoteContainer notes={this.props.appointment.notes} />

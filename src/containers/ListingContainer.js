@@ -48,7 +48,7 @@ export default class ListingContainer extends React.Component {
       );
     });
     return (
-      <div className="container">
+      <div>
         <br />
         <Tabs className="tab-demo z-depth-0">
           <Tab title="All Listings" active>
